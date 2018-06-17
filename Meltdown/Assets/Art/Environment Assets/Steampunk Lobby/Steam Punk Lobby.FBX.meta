@@ -1,0 +1,241 @@
+fileFormatVersion: 2
+guid: 95dcac7c0baed344c8120238deaf26b8
+timeCreated: 1529187422
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Bathroom Back Wall
+    100002: Bathroom Ceiling
+    100004: Bathroom Entry Wall
+    100006: Bathroom Inlet  Wall
+    100008: Bathroom Seperation Wall
+    100010: Center Wall
+    100012: Grand Door Frame
+    100014: Lounge Back Wall
+    100016: Lounge Ceiling
+    100018: Lounge Floor
+    100020: Lounge Side Wall
+    100022: Main Area Floor
+    100024: Main Back Wall
+    100026: Main Ceiling
+    100028: Main Side Wall
+    100030: Rafters
+    100032: Rafters001
+    100034: Rafters002
+    100036: //RootNode
+    100038: Vault Door
+    100040: Vault Panel
+    100042: Vault Wall
+    100044: Wall Pillar
+    100046: Wall Pillar Tall
+    100048: Wall Pillar Tall001
+    100050: Wall Pillar001
+    100052: Wall Pillar002
+    400000: Bathroom Back Wall
+    400002: Bathroom Ceiling
+    400004: Bathroom Entry Wall
+    400006: Bathroom Inlet  Wall
+    400008: Bathroom Seperation Wall
+    400010: Center Wall
+    400012: Grand Door Frame
+    400014: Lounge Back Wall
+    400016: Lounge Ceiling
+    400018: Lounge Floor
+    400020: Lounge Side Wall
+    400022: Main Area Floor
+    400024: Main Back Wall
+    400026: Main Ceiling
+    400028: Main Side Wall
+    400030: Rafters
+    400032: Rafters001
+    400034: Rafters002
+    400036: //RootNode
+    400038: Vault Door
+    400040: Vault Panel
+    400042: Vault Wall
+    400044: Wall Pillar
+    400046: Wall Pillar Tall
+    400048: Wall Pillar Tall001
+    400050: Wall Pillar001
+    400052: Wall Pillar002
+    2100000: Lounge Floor
+    2100002: Main Floor
+    2100004: Bathroom Back Wall
+    2100006: Vault Wall
+    2100008: Main Side Wall
+    2100010: Main Back Wall
+    2100012: Center Wall
+    2100014: Lounge Back Wall
+    2100016: Lounge Side Wall
+    2100018: Bathroom Entry Wall
+    2100020: Bathroom Inlet Wall
+    2100022: Bathroom Seperation Wall
+    2100024: Main Ceiling
+    2100026: Vault Door Panel
+    2100028: Vault Door
+    2100030: Grand Door Frame
+    2100032: Wall Pillar
+    2100034: Rafters
+    2100036: Wall Pillar Tall
+    2100038: Lounge Ceiling
+    2100040: Bathroom Ceiling
+    2300000: Bathroom Back Wall
+    2300002: Bathroom Ceiling
+    2300004: Bathroom Entry Wall
+    2300006: Bathroom Inlet  Wall
+    2300008: Bathroom Seperation Wall
+    2300010: Center Wall
+    2300012: Grand Door Frame
+    2300014: Lounge Back Wall
+    2300016: Lounge Ceiling
+    2300018: Lounge Floor
+    2300020: Lounge Side Wall
+    2300022: Main Area Floor
+    2300024: Main Back Wall
+    2300026: Main Ceiling
+    2300028: Main Side Wall
+    2300030: Rafters
+    2300032: Rafters001
+    2300034: Rafters002
+    2300036: Vault Door
+    2300038: Vault Panel
+    2300040: Vault Wall
+    2300042: Wall Pillar
+    2300044: Wall Pillar Tall
+    2300046: Wall Pillar Tall001
+    2300048: Wall Pillar001
+    2300050: Wall Pillar002
+    3300000: Bathroom Back Wall
+    3300002: Bathroom Ceiling
+    3300004: Bathroom Entry Wall
+    3300006: Bathroom Inlet  Wall
+    3300008: Bathroom Seperation Wall
+    3300010: Center Wall
+    3300012: Grand Door Frame
+    3300014: Lounge Back Wall
+    3300016: Lounge Ceiling
+    3300018: Lounge Floor
+    3300020: Lounge Side Wall
+    3300022: Main Area Floor
+    3300024: Main Back Wall
+    3300026: Main Ceiling
+    3300028: Main Side Wall
+    3300030: Rafters
+    3300032: Rafters001
+    3300034: Rafters002
+    3300036: Vault Door
+    3300038: Vault Panel
+    3300040: Vault Wall
+    3300042: Wall Pillar
+    3300044: Wall Pillar Tall
+    3300046: Wall Pillar Tall001
+    3300048: Wall Pillar001
+    3300050: Wall Pillar002
+    4300000: Lounge Floor
+    4300002: Main Area Floor
+    4300004: Bathroom Back Wall
+    4300006: Vault Wall
+    4300008: Main Side Wall
+    4300010: Main Back Wall
+    4300012: Center Wall
+    4300014: Lounge Back Wall
+    4300016: Lounge Side Wall
+    4300018: Bathroom Entry Wall
+    4300020: Bathroom Inlet  Wall
+    4300022: Bathroom Seperation Wall
+    4300024: Main Ceiling
+    4300026: Vault Panel
+    4300028: Vault Door
+    4300030: Grand Door Frame
+    4300032: Wall Pillar
+    4300034: Rafters
+    4300036: Rafters001
+    4300038: Wall Pillar001
+    4300040: Rafters002
+    4300042: Wall Pillar002
+    4300044: Wall Pillar Tall
+    4300046: Wall Pillar Tall001
+    4300048: Lounge Ceiling
+    4300050: Bathroom Ceiling
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
