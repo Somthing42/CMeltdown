@@ -32,6 +32,11 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 	public float lerpTimeUp = 1.0f;
     [HideInInspector]
     public bool isAnimating = false;						//is the object animated currently
+	public GameObject lid;
+	public GameObject button;
+	HingeJoint lidAngle;
+	public float lidAng;
+	public float closeAngle = -10f;
 
 	[Header("Timer")]
 	public float timerStuff;
@@ -42,6 +47,8 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 
 	public Interactable[] testSeq= new Interactable[5];
 
+
+
     // Use this for initialization
     void Start() {
         gameCounter = 0;                                                    //set counter to zero at start
@@ -51,6 +58,7 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
         currentSequenceSize = sequenceSizes[currentSequence];				//set current sequence size to start of sequence
         interactedObjects = new Queue<Interactable>(currentSequenceSize);	//create new queue for interacted objects
         StartCoroutine("DisplaySequenceToRenderer");						//start display coroutine
+		lidAngle = lid.GetComponent<HingeJoint>();
     }
 
     // Update is called once per frame
@@ -63,6 +71,14 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 		}
 		if (authDuration >= 2) {
 			WinCase ();
+		}
+
+		lidAng = lidAngle.angle;
+
+		if (lidAng <= closeAngle) {
+			button.SetActive (true);
+		} else {
+			button.SetActive (false);
 		}
     }
 
@@ -165,41 +181,50 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 
 	public void Authenticate()																//authenticate function
 	{
-		bool authenticated = false;															//set authenticated to false initially
+		if (lidAng <= closeAngle) {
+			bool authenticated = false;															//set authenticated to false initially
 
-		if (interactedObjects.Count == currentSequenceSize) {								//if the count of interacted objects is equal to current sequence size
+			if (interactedObjects.Count == currentSequenceSize) {								//if the count of interacted objects is equal to current sequence size
 
-			//if (Input.GetKeyDown (KeyCode.Space)) {											//~~~~if space is pressed~~~~ not sure how to change this to physical button if needed
-			Interactable[] listToCheck = interactedObjects.ToArray ();					//convert interacted objects queue to an array and store in list to check
-			int offset = 0;
-			for (int count = 0; count < currentSequence; count++) {
-				offset += sequenceSizes [count];
+				//if (Input.GetKeyDown (KeyCode.Space)) {											//~~~~if space is pressed~~~~ not sure how to change this to physical button if needed
+				Interactable[] listToCheck = interactedObjects.ToArray ();					//convert interacted objects queue to an array and store in list to check
+				int offset = 0;
+				for (int count = 0; count < currentSequence; count++) {
+					offset += sequenceSizes [count];
 
-			}
+				}
 
 			
-			for (int count = offset; count < currentSequenceSize + offset; count++) {
-				if (listToCheck [count - offset].itemIndex == masterSequence [count].itemIndex) {
-					authenticated = true;
+				for (int count = offset; count < currentSequenceSize + offset; count++) {
+					if (listToCheck [count - offset].itemIndex == masterSequence [count].itemIndex) {
+						authenticated = true;
+					} else {
+						authenticated = false;
+						break;
+					}
+				}
+
+				if (authenticated) {
+					interactedObjects.Clear ();
+					interactedObj.Clear ();
+					if (currentSequence < sequenceSizes.Length - 1) {
+						currentSequence++;
+						currentSequenceSize = sequenceSizes [currentSequence];
+					}
+					Debug.Log ("Authenticated");
+					authText.text = "Authenticated";
+					gameCounter++;                                                      //increae counter for every successful sequence
+					authDuration = 0.0f;
+					return;
+
 				} else {
-					authenticated = false;
-					break;
+					interactedObjects.Clear ();
+					interactedObj.Clear ();
+					Debug.Log ("Rejected");
+					authText.text = "Rejected";
+					authDuration = 0.0f;
 				}
-			}
-
-			if (authenticated) {
-				interactedObjects.Clear ();
-				interactedObj.Clear ();
-				if (currentSequence < sequenceSizes.Length - 1) {
-					currentSequence++;
-					currentSequenceSize = sequenceSizes [currentSequence];
-				}
-				Debug.Log ("Authenticated");
-				authText.text = "Authenticated";
-                gameCounter++;                                                      //increae counter for every successful sequence
-				authDuration = 0.0f;
-				return;
-
+				//}
 			} else {
 				interactedObjects.Clear ();
 				interactedObj.Clear ();
@@ -207,13 +232,8 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 				authText.text = "Rejected";
 				authDuration = 0.0f;
 			}
-			//}
 		} else {
-			interactedObjects.Clear ();
-			interactedObj.Clear ();
-			Debug.Log ("Rejected");
-			authText.text = "Rejected";
-			authDuration = 0.0f;
+			return;
 		}
 	}
 

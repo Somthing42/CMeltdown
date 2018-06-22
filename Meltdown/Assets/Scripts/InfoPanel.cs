@@ -15,15 +15,7 @@ public class InfoPanel : MonoBehaviour
 
 		int Full = 32;
 
-		if (LineCount > Full)
-		{
-			while (PanelString.Remove(0) != "\n")
-			{
-
-			}
-
-			LineCount = 0;
-		}
+	
 	}
 
     private void Update()
