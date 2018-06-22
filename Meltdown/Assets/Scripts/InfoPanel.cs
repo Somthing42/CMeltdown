@@ -13,17 +13,6 @@ public class InfoPanel : MonoBehaviour
 		InfoPanelText.text = PanelString + Line + "\n";
 		++LineCount;
 
-		int Full = 32;
-
-		if (LineCount > Full)
-		{
-			while (PanelString.Remove(0) != "\n")
-			{
-
-			}
-
-			LineCount = 0;
-		}
 	}
 
     private void Update()
