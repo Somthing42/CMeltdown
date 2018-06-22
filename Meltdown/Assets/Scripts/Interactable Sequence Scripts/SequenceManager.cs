@@ -32,6 +32,11 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 	public float lerpTimeUp = 1.0f;
     [HideInInspector]
     public bool isAnimating = false;						//is the object animated currently
+	public GameObject lid;
+	public GameObject button;
+	HingeJoint lidAngle;
+	public float lidAng;
+	public float closeAngle = -10f;
 
 	[Header("Timer")]
 	public float timerStuff;
@@ -42,11 +47,7 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 
 	public Interactable[] testSeq= new Interactable[5];
 
-	public GameObject lid;
-	public GameObject button;
-	HingeJoint lidAngle;
-	public float lidAng;
-	public float closeAngle = -10f;
+
 
     // Use this for initialization
     void Start() {
