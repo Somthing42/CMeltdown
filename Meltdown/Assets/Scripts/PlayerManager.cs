@@ -28,22 +28,24 @@ public class PlayerManager : Photon.PunBehaviour
 		instance = this;
 	}
 
-#if true
+#if false
 	private void Start()
 	{
+        if (PhotonNetwork.connected)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
 
-        if (PhotonNetwork.isMasterClient)
-		{
-            
-            NewPlayer(0);
-			GameManager.Instance.infoPanel.AddLine("MasterClient NewPlayer");
-		}
+                NewPlayer(0);
+                GameManager.Instance.infoPanel.AddLine("MasterClient NewPlayer");
+            }
+        }
 	}
 #else
     public override void OnJoinedRoom() {
         if (PhotonNetwork.isMasterClient)
         {
-            GameManager.Instance.infoPanel.AddLine("MasterClient NewPlayer");
+            //GameManager.Instance.infoPanel.AddLine("MasterClient NewPlayer");
             NewPlayer(0);
         }
     }

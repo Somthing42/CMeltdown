@@ -134,7 +134,7 @@ public class Matchmaker : Photon.PunBehaviour
 
     void InRoom()
     {
-        PhotonNetwork.LoadLevel(GameScene);
+        //PhotonNetwork.LoadLevel(GameScene);
 
     }
 
