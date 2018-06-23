@@ -138,6 +138,11 @@ public class ControllerScript : MonoBehaviour
 
 	}
 
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
 	private void EnablePointer(RaycastHit hit)
 	{
 		pointerObject.SetActive(true);
