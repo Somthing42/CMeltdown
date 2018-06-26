@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
+public class SequenceManager :  Photon.PunBehaviour {
     [Header("Sequence Information")]
 	public List<Interactable> masterSequence;				//main sequence (contains all interactables)
 	public Queue<Interactable> interactedObjects;			//interacted objects queue
@@ -113,23 +113,6 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 		testSeq[4] = masterSequence[4];
     }
 
-	public void OnPhotonSerializeView(PhotonStream stream,PhotonMessageInfo info)
-	{
-		if (stream.isWriting) {
-			stream.SendNext (testSeq);
-			Debug.Log ("Work");
-		} 
-		else
-		{
-			testSeq = (Interactable[])stream.ReceiveNext ();
-			Debug.Log ("Work");
-			masterSequence[0]=testSeq[0];
-			masterSequence[1]=testSeq[1];
-			masterSequence[2]=testSeq[2];
-			masterSequence[3]=testSeq[3];
-			masterSequence[4]=testSeq[4];
-		}
-	}
 
 
     // NOTE(barret): This needs to be tested. I don't know how reliable this is. 
@@ -141,7 +124,7 @@ public class SequenceManager :  Photon.PunBehaviour, IPunObservable {
 
     void AddUsedObjectToList(Interactable _interactable)				//add used object function
     {
-
+        print("IMPORTANT: AddUsedObjectToList");
 		if (interactedObjects.Count + 1 > currentSequenceSize)			//if the count of interactable objects (plus one) is greater than the current sequence size
         {
 
