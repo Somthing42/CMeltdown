@@ -48,6 +48,7 @@ public class SequenceManager : Photon.PunBehaviour {
     public Interactable[] testSeq = new Interactable[5];
 
 
+    public List<Interactable> TestMS;
 
     // Use this for initialization
     void Start() {
@@ -250,7 +251,7 @@ public class SequenceManager : Photon.PunBehaviour {
     void UpdateMasterSequence(int[] Returned)										//update queue function for photon
     {
         print("IMPORTANT: UpdateMasterSequence");
-        masterSequence = DeSerializeMasterSequence(Returned);
+        TestMS = DeSerializeMasterSequence(Returned);
     }
 
         public void Authenticate()																//authenticate function
