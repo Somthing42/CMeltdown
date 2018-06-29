@@ -52,8 +52,9 @@ public class SequenceManager : Photon.PunBehaviour {
     // Use this for initialization
     void Start() {
         gameCounter = 0;                                                    //set counter to zero at start
-        consoles = FindObjectsOfType<Console>();							//add all consoles to console array
-        CreateSequence();													//run sequence creation function
+        consoles = FindObjectsOfType<Console>();	//add all consoles to console array
+        CreateSequence();		                    //run sequence creation function
+        SyncMasterSequence();
 
         currentSequenceSize = sequenceSizes[currentSequence];				//set current sequence size to start of sequence
         interactedObjects = new Queue<Interactable>(currentSequenceSize);	//create new queue for interacted objects
@@ -186,6 +187,20 @@ public class SequenceManager : Photon.PunBehaviour {
         return Result;
     }
 
+    int[] SerializeMasterSequence(List<Interactable> masterSequence)
+    {
+        Interactable[] InterArray = masterSequence.ToArray();
+        int[] Result = new int[masterSequence.Count];
+        for (int Index = 0;
+            Index < masterSequence.Count;
+            ++Index)
+        {
+            Result[Index] = InterArray[Index].itemIndex;
+        }
+
+        return Result;
+    }
+
     Queue<Interactable> DeSerializeInteractedObjects(int[] Sequence)
     {
         Queue<Interactable> Result = new Queue<Interactable>();
@@ -207,7 +222,37 @@ public class SequenceManager : Photon.PunBehaviour {
         return Result; 
     }
 
-    public void Authenticate()																//authenticate function
+    List<Interactable> DeSerializeMasterSequence(int[] Sequence)
+    {
+        List<Interactable> Result = new List<Interactable>();
+
+        foreach (int Index in Sequence)
+        {
+            Interactable Inter = GetInteractableUsingId(masterSequence, Index);
+            Result.Add(Inter);
+        }
+        return Result;
+    }
+
+    void SyncMasterSequence()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            int[] Serialized = SerializeMasterSequence(masterSequence);
+
+            PhotonView photonView = PhotonView.Get(this);
+            //set photon view to this
+            photonView.RPC("UpdateMasterSequence", PhotonTargets.Others, Serialized);
+        }
+    }
+
+    [PunRPC]
+    void UpdateMasterSequence(int[] Returned)										//update queue function for photon
+    {
+        masterSequence = DeSerializeMasterSequence(Returned);
+    }
+
+        public void Authenticate()																//authenticate function
 	{
 		if (lidAng <= closeAngle) {
 			bool authenticated = false;															//set authenticated to false initially
