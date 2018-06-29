@@ -252,6 +252,8 @@ public class SequenceManager : Photon.PunBehaviour {
     {
         print("IMPORTANT: UpdateMasterSequence");
         TestMS = DeSerializeMasterSequence(Returned);
+        masterSequence.Clear();
+        masterSequence = TestMS;
     }
 
         public void Authenticate()																//authenticate function
