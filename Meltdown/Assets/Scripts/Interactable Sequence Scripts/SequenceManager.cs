@@ -188,19 +188,7 @@ public class SequenceManager : Photon.PunBehaviour {
         return Result;
     }
 
-    int[] SerializeMasterSequence(List<Interactable> masterSequence)
-    {
-        Interactable[] InterArray = masterSequence.ToArray();
-        int[] Result = new int[masterSequence.Count];
-        for (int Index = 0;
-            Index < masterSequence.Count;
-            ++Index)
-        {
-            Result[Index] = InterArray[Index].itemIndex;
-        }
 
-        return Result;
-    }
 
     Queue<Interactable> DeSerializeInteractedObjects(int[] Sequence)
     {
@@ -223,18 +211,6 @@ public class SequenceManager : Photon.PunBehaviour {
         return Result; 
     }
 
-    List<Interactable> DeSerializeMasterSequence(int[] Sequence)
-    {
-        List<Interactable> Result = new List<Interactable>();
-
-        foreach (int Index in Sequence)
-        {
-            Interactable Inter = GetInteractableUsingId(masterSequence, Index);
-            Result.Add(Inter);
-        }
-        return Result;
-    }
-
     void SyncMasterSequence()
     {
         if (PhotonNetwork.isMasterClient)
@@ -253,15 +229,41 @@ public class SequenceManager : Photon.PunBehaviour {
         print("IMPORTANT: UpdateMasterSequence");
         TestMS = DeSerializeMasterSequence(Returned);
         masterSequence.Clear();
-        Interactable[] Test = TestMS.ToArray();
+        //Interactable[] Test = TestMS.ToArray();
 
-        foreach (Interactable inter in Test)
-        {
-            masterSequence.Add(inter);
-        }
+        //foreach (Interactable inter in Test)
+        //{
+           // masterSequence.Add(inter);
+        //}
     }
 
-        public void Authenticate()																//authenticate function
+    int[] SerializeMasterSequence(List<Interactable> masterSequence)
+    {
+        Interactable[] InterArray = masterSequence.ToArray();
+        int[] Result = new int[masterSequence.Count];
+        for (int Index = 0;
+            Index < masterSequence.Count;
+            ++Index)
+        {
+            Result[Index] = InterArray[Index].itemIndex;
+        }
+
+        return Result;
+    }
+
+    List<Interactable> DeSerializeMasterSequence(int[] Sequence)
+    {
+        List<Interactable> Result = new List<Interactable>();
+
+        foreach (int Index in Sequence)
+        {
+            Interactable Inter = GetInteractableUsingId(masterSequence, Index);
+            Result.Add(Inter);
+        }
+        return Result;
+    }
+
+    public void Authenticate()																//authenticate function
 	{
 		if (lidAng <= closeAngle) {
 			bool authenticated = false;															//set authenticated to false initially
