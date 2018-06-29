@@ -232,7 +232,7 @@ public class SequenceManager : Photon.PunBehaviour {
     void UpdateMasterSequence(int[] Returned)										//update queue function for photon
     {
         print("IMPORTANT: UpdateMasterSequence");
-        TestMS = DeSerializeMasterSequence(Returned);
+        masterSequence = DeSerializeMasterSequence(Returned);
         //masterSequence.Clear();
         //Interactable[] Test = TestMS.ToArray();
 
