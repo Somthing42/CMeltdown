@@ -4,48 +4,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SequenceManager :  Photon.PunBehaviour {
+public class SequenceManager : Photon.PunBehaviour {
     [Header("Sequence Information")]
-	public List<Interactable> masterSequence;				//main sequence (contains all interactables)
-	public Queue<Interactable> interactedObjects;			//interacted objects queue
-	public List<Interactable> interactedObj;
+    public List<Interactable> masterSequence;               //main sequence (contains all interactables)
+    public Queue<Interactable> interactedObjects;           //interacted objects queue
+    public List<Interactable> interactedObj;
     public int[] sequenceSizes;								//sequence sizes array
     [HideInInspector]
     public int currentSequence = 0;							//current sequence location
     [HideInInspector]
-    public int currentSequenceSize;							//size of current sequence
-   
+    public int currentSequenceSize;                         //size of current sequence
+
     public Console[] consoles;								//console objects array
 
     [Header("Display Information")]
     public SpriteRenderer OfficeDisplay;					//sprite display
-    public Text sequenceText;								//text display
-	public Text authText;
-    public float stepTransitionSpeed = 3.0f;				//time till display change
-	public float authDispDelay = 10.0f;
-	[HideInInspector]
-	public float authDuration = 0.0f;
+    public Text sequenceText;                               //text display
+    public Text authText;
+    public float stepTransitionSpeed = 3.0f;                //time till display change
+    public float authDispDelay = 10.0f;
+    [HideInInspector]
+    public float authDuration = 0.0f;
 
     [Header("Authentication Button Info")]
-	public GameObject lerpObject;							//authenticate button lerp
-	public Transform returnPosition;
-	public float lerpTimeUp = 1.0f;
+    public GameObject lerpObject;                           //authenticate button lerp
+    public Transform returnPosition;
+    public float lerpTimeUp = 1.0f;
     [HideInInspector]
-    public bool isAnimating = false;						//is the object animated currently
-	public GameObject lid;
-	public GameObject button;
-	HingeJoint lidAngle;
-	public float lidAng;
-	public float closeAngle = -10f;
+    public bool isAnimating = false;                        //is the object animated currently
+    public GameObject lid;
+    public GameObject button;
+    HingeJoint lidAngle;
+    public float lidAng;
+    public float closeAngle = -10f;
 
-	[Header("Timer")]
-	public float timerStuff;
+    [Header("Timer")]
+    public float timerStuff;
 
-	[Header("Win Conditions")]
-	public float gameCounter;
-	public Sprite winSprite;
+    [Header("Win Conditions")]
+    public float gameCounter;
+    public Sprite winSprite;
 
-	public Interactable[] testSeq= new Interactable[5];
+    public Interactable[] testSeq = new Interactable[5];
 
 
 
@@ -57,29 +57,34 @@ public class SequenceManager :  Photon.PunBehaviour {
 
         currentSequenceSize = sequenceSizes[currentSequence];				//set current sequence size to start of sequence
         interactedObjects = new Queue<Interactable>(currentSequenceSize);	//create new queue for interacted objects
-        StartCoroutine("DisplaySequenceToRenderer");						//start display coroutine
-		lidAngle = lid.GetComponent<HingeJoint>();
+        StartCoroutine("DisplaySequenceToRenderer");                        //start display coroutine
+        lidAngle = lid.GetComponent<HingeJoint>();
+
+
+        //Interactable Result = GetInteractableUsingId(masterSequence, 5);
+        //if (Result)
+            //print(Result.itemIndex);
     }
 
     // Update is called once per frame
     void Update() {
-		if (authDuration < authDispDelay + 1) {
-			authDuration += Time.deltaTime;
-		}
-		if (authDuration >= authDispDelay) {
-			authText.text = "Plz Enter \nSequence:";
-		}
-		if (authDuration >= 2) {
-			WinCase ();
-		}
+        if (authDuration < authDispDelay + 1) {
+            authDuration += Time.deltaTime;
+        }
+        if (authDuration >= authDispDelay) {
+            authText.text = "Plz Enter \nSequence:";
+        }
+        if (authDuration >= 2) {
+            WinCase();
+        }
 
-		lidAng = lidAngle.angle;
+        lidAng = lidAngle.angle;
 
-		if (lidAng <= closeAngle) {
-			button.SetActive (true);
-		} else {
-			button.SetActive (false);
-		}
+        if (lidAng <= closeAngle) {
+            button.SetActive(true);
+        } else {
+            button.SetActive(false);
+        }
     }
 
     public void CreateSequence()											//create sequence function
@@ -106,11 +111,11 @@ public class SequenceManager :  Photon.PunBehaviour {
             masterSequence[randomValue] = masterSequence[count];						//place the object at count location into the randomVal location
             masterSequence[count] = holder;												//replace the temp object into the master sequence at count location
         }
-		testSeq[0] = masterSequence[0];
-		testSeq [1] = masterSequence [1];
-		testSeq[2] = masterSequence[2];
-		testSeq[3] = masterSequence[3];
-		testSeq[4] = masterSequence[4];
+        testSeq[0] = masterSequence[0];
+        testSeq[1] = masterSequence[1];
+        testSeq[2] = masterSequence[2];
+        testSeq[3] = masterSequence[3];
+        testSeq[4] = masterSequence[4];
     }
 
 
@@ -125,44 +130,84 @@ public class SequenceManager :  Photon.PunBehaviour {
     void AddUsedObjectToList(Interactable _interactable)				//add used object function
     {
         print("IMPORTANT: AddUsedObjectToList");
-		if (interactedObjects.Count + 1 > currentSequenceSize)			//if the count of interactable objects (plus one) is greater than the current sequence size
+        if (interactedObjects.Count + 1 > currentSequenceSize)			//if the count of interactable objects (plus one) is greater than the current sequence size
         {
 
             interactedObjects.Dequeue();								//remove the object at the beginning of the queue
-            interactedObjects.Enqueue(_interactable);					//add the passed in object to the queue
-			interactedObj.Add(_interactable);
+            interactedObjects.Enqueue(_interactable);                   //add the passed in object to the queue
+            interactedObj.Add(_interactable);
         }
         else             												//else
         {
-            interactedObjects.Enqueue(_interactable);					//add the passed in object to the queue
-			interactedObj.Add(_interactable);
+            interactedObjects.Enqueue(_interactable);                   //add the passed in object to the queue
+            interactedObj.Add(_interactable);
         }
+
 
         if (!PhotonNetwork.isMasterClient)													//if not master client
         {
-            PhotonView photonView = PhotonView.Get(this);									//set photon view to this
-            photonView.RPC("UpdateQueue", PhotonTargets.MasterClient, interactedObjects);	//rpc pass to master client
+            PhotonView photonView = PhotonView.Get(this);                                   //set photon view to this
+            int[] Serialized = SerializeInteractedObjects(interactedObjects);
+            photonView.RPC("UpdateQueue", PhotonTargets.MasterClient, Serialized);	//rpc pass to master client
         }
-		else 																				//else (is master client)
+        else 																				//else (is master client)
         {
-            PhotonView photonView = PhotonView.Get(this);									//set photon view to this
-            photonView.RPC("UpdateQueue", PhotonTargets.Others, interactedObjects);			//rpc pass to others
+            PhotonView photonView = PhotonView.Get(this);
+            int[] Serialized = SerializeInteractedObjects(interactedObjects);    //set photon view to this
+            photonView.RPC("UpdateQueue", PhotonTargets.Others, Serialized);			//rpc pass to others
         }
     }
 
     [PunRPC]
-    void UpdateQueue(Queue<Interactable>  Sequence)										//update queue function for photon
+    void UpdateQueue(int[] Returned)										//update queue function for photon
     {
+        Queue<Interactable> Sequence = DeSerializeInteractedObjects(Returned);
         interactedObjects = Sequence;													//set interacted objects queue to passed in queue
 
         if (PhotonNetwork.isMasterClient)												//if master client
         {
-            PhotonView photonView = PhotonView.Get(this);								//set photon view to this
-            photonView.RPC("UpdateQueue", PhotonTargets.Others, interactedObjects);		//rpc pass to others
+            PhotonView photonView = PhotonView.Get(this);
+            int[] Serialized = SerializeInteractedObjects(interactedObjects);       //set photon view to this
+            photonView.RPC("UpdateQueue", PhotonTargets.Others, Serialized);		//rpc pass to others
         }
     }
 
-	public void Authenticate()																//authenticate function
+    int[] SerializeInteractedObjects(Queue<Interactable> Sequence)
+    {
+        Interactable[] InterArray = Sequence.ToArray();
+        int[] Result = new int[Sequence.Count];
+        for (int Index = 0;
+            Index < Sequence.Count;
+            ++Index)
+        {
+            Result[Index] = InterArray[Index].itemIndex;
+        }
+
+        return Result;
+    }
+
+    Queue<Interactable> DeSerializeInteractedObjects(int[] Sequence)
+    {
+        Queue<Interactable> Result = new Queue<Interactable>();
+
+        foreach (int Index in Sequence)
+        {
+            Interactable Inter = GetInteractableUsingId(masterSequence, Index);
+            Result.Enqueue(Inter);
+        }
+        return Result;
+    }
+
+    Interactable GetInteractableUsingId(List<Interactable> masterSequence, int Index)
+    {
+        Interactable Result = new Interactable();
+
+        Result = masterSequence.Find(x => x.itemIndex == Index);
+
+        return Result; 
+    }
+
+    public void Authenticate()																//authenticate function
 	{
 		if (lidAng <= closeAngle) {
 			bool authenticated = false;															//set authenticated to false initially
