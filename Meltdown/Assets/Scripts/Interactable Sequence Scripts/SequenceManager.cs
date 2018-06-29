@@ -253,7 +253,12 @@ public class SequenceManager : Photon.PunBehaviour {
         print("IMPORTANT: UpdateMasterSequence");
         TestMS = DeSerializeMasterSequence(Returned);
         masterSequence.Clear();
-        masterSequence = TestMS;
+        Interactable[] Test = TestMS.ToArray();
+
+        foreach (Interactable inter in Test)
+        {
+            masterSequence.Add(inter);
+        }
     }
 
         public void Authenticate()																//authenticate function
