@@ -55,7 +55,7 @@ public class SequenceManager : Photon.PunBehaviour {
         gameCounter = 0;                                                    //set counter to zero at start
         consoles = FindObjectsOfType<Console>();	//add all consoles to console array
         CreateSequence();		                    //run sequence creation function
-        SyncMasterSequence();
+        
 
         currentSequenceSize = sequenceSizes[currentSequence];				//set current sequence size to start of sequence
         interactedObjects = new Queue<Interactable>(currentSequenceSize);	//create new queue for interacted objects
@@ -66,6 +66,11 @@ public class SequenceManager : Photon.PunBehaviour {
         //Interactable Result = GetInteractableUsingId(masterSequence, 5);
         //if (Result)
             //print(Result.itemIndex);
+    }
+
+    public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        SyncMasterSequence();
     }
 
     // Update is called once per frame
@@ -228,7 +233,7 @@ public class SequenceManager : Photon.PunBehaviour {
     {
         print("IMPORTANT: UpdateMasterSequence");
         TestMS = DeSerializeMasterSequence(Returned);
-        masterSequence.Clear();
+        //masterSequence.Clear();
         //Interactable[] Test = TestMS.ToArray();
 
         //foreach (Interactable inter in Test)
