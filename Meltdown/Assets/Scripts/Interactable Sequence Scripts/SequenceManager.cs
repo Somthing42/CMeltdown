@@ -249,6 +249,7 @@ public class SequenceManager : Photon.PunBehaviour {
     [PunRPC]
     void UpdateMasterSequence(int[] Returned)										//update queue function for photon
     {
+        print("IMPORTANT: UpdateMasterSequence");
         masterSequence = DeSerializeMasterSequence(Returned);
     }
 
@@ -326,7 +327,7 @@ public class SequenceManager : Photon.PunBehaviour {
 				sequenceText.text = (count - offset + 1).ToString();
 				OfficeDisplay.sprite = masterSequence[count].itemImage;
 
-				Debug.Log("Item that Should be showing: " + masterSequence[count].itemIndex);
+				//Debug.Log("Item that Should be showing: " + masterSequence[count].itemIndex);
 				yield return new WaitForSeconds(stepTransitionSpeed);
 
 			}
