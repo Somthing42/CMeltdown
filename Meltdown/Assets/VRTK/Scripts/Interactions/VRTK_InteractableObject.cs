@@ -160,6 +160,8 @@ namespace VRTK
         [HideInInspector]
         public int usingState = 0;
 
+
+
         /// <summary>
         /// isKinematic is a pass through to the `isKinematic` getter/setter on the object's rigidbody component.
         /// </summary>
@@ -434,10 +436,12 @@ namespace VRTK
             if (!IsGrabbed() || IsSwappable())
             {
                 PrimaryControllerGrab(currentGrabbingGameObject);
+				SendMessage ("OnInteractableObjectTouched",SendMessageOptions.DontRequireReceiver);
             }
             else
             {
                 SecondaryControllerGrab(currentGrabbingGameObject);
+				SendMessage ("OnInteractableObjectTouched",SendMessageOptions.DontRequireReceiver);
             }
             OnInteractableObjectGrabbed(SetInteractableObjectEvent(currentGrabbingGameObject));
         }
