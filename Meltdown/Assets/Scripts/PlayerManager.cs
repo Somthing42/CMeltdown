@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : Photon.PunBehaviour
 {
@@ -15,9 +16,11 @@ public class PlayerManager : Photon.PunBehaviour
 
 	public static PlayerManager instance;
 
-    public GameObject CameraRig; 
+    public GameObject CameraRig;
 
-	void Awake()
+    static string playerNamePrefKey = "PlayerName";
+
+    void Awake()
 	{
 		if (playerAvatar == null)
 		{
@@ -70,8 +73,10 @@ public class PlayerManager : Photon.PunBehaviour
 		var trans = breakroomspawns[idx].transform;
 		var player = PhotonNetwork.Instantiate(playerAvatar.name, trans.position, trans.rotation, 0);
 		CameraRig.GetComponent<PlayerTeleportHandler>().PlayerIndex = idx;
-		//master player is plant manager, disable teleport points
-		if (idx == 0)
+        Text PlayerText = player.GetComponentInChildren<Text>();
+        PlayerText.text = PlayerPrefs.GetString(playerNamePrefKey);
+        //master player is plant manager, disable teleport points
+        if (idx == 0)
 		{
 
 			GameManager.Instance.leftController.GetComponent<ControllerScript>().enabled = false;
