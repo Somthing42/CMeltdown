@@ -24,7 +24,7 @@ public class ControllerScript : MonoBehaviour
     private PlayerTeleportHandler PTH;
 
     
-    public GameObject PlayerMenu; 
+    //public GameObject PlayerMenu; 
     
 	void Awake()
 	{
@@ -55,16 +55,13 @@ public class ControllerScript : MonoBehaviour
 			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100))
 			{
 
-                //if (hit.transform.gameObject.GetComponent<TeleportPoint>() != null)
+                
                 if(hit.collider.gameObject.tag == "Floor")
                 {
                     temp = hit.transform.gameObject;
-					//hit.transform.gameObject.GetComponent<TeleportPoint>().HighlightGreen();
-					//Debug.Log("test");
+
 
                     teleportDestination = hit.point; // store where it sends you
-
-                    
 				}
 				
 				hitPoint = hit.point;
@@ -80,7 +77,7 @@ public class ControllerScript : MonoBehaviour
 		// 3
 		if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
 		{
-            GameManager.Instance.infoPanel.AddLine(temp.name + " was it with tag " + temp.tag);
+            //GameManager.Instance.infoPanel.AddLine(temp.name + " was it with tag " + temp.tag);
             if (teleportDestination != Vector3.zero && PTH.CanTeleport)
 			{
                 //GameManager.Instance.infoPanel.AddLine("Teleporting");
@@ -116,7 +113,7 @@ public class ControllerScript : MonoBehaviour
                     }
                     else if (RotZone.Type == RotationZone.ZoneType.FORWARD_DIR)
                     {
-                        GameManager.Instance.infoPanel.AddLine("Forward Dir");
+                        //GameManager.Instance.infoPanel.AddLine("Forward Dir");
                         Rot = RotZone.Orinator.transform.rotation;
 
                     }
@@ -132,11 +129,16 @@ public class ControllerScript : MonoBehaviour
 
         if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
-            bool IsActive = PlayerMenu.GetActive();
-            PlayerMenu.SetActive(!IsActive);
+           // bool IsActive = PlayerMenu.GetActive();
+            //PlayerMenu.SetActive(!IsActive);
         }
 
 	}
+
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
 
 	private void EnablePointer(RaycastHit hit)
 	{
