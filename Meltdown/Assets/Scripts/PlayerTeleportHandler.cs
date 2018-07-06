@@ -20,7 +20,7 @@ public class PlayerTeleportHandler : Photon.PunBehaviour
 
 	void OnEnable()
 	{
-        print("OnEnable PlayerTeleportHandler");
+        //print("OnEnable PlayerTeleportHandler");
 		PhotonNetwork.OnEventCall += this.GameStartTeleport;
 	}
 	void OnDisable()
@@ -53,8 +53,6 @@ public class PlayerTeleportHandler : Photon.PunBehaviour
 		}
 
 	}
-
-    
 
     public bool CanTeleport = true;
     public IEnumerator TeleportDelay(float SecondsOfDelay)

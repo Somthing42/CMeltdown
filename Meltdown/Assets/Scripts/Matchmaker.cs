@@ -32,7 +32,7 @@ public class Matchmaker : Photon.PunBehaviour
 
     public GameObject KeyBoardCanvas;
 
-    public string GameScene = "Game";
+    public GameObject UICanvas; 
 
 
 
@@ -117,6 +117,7 @@ public class Matchmaker : Photon.PunBehaviour
     public void ActivateKeyBoard()
     {
         KeyBoardCanvas.SetActive(true);
+        
     }
 
     public void LeaveRoom()
@@ -128,14 +129,15 @@ public class Matchmaker : Photon.PunBehaviour
     {
         if (PhotonNetwork.isMasterClient)
         {
-            PhotonNetwork.LoadLevel(GameScene);
+            //PhotonNetwork.LoadLevel(GameScene);
         }
     }
 
     void InRoom()
     {
         //PhotonNetwork.LoadLevel(GameScene);
-
+        KeyBoardCanvas.SetActive(false);
+        UICanvas.SetActive(false);
     }
 
     void ConnectedToMaster()

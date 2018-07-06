@@ -24,7 +24,7 @@ public class ControllerScript : MonoBehaviour
     private PlayerTeleportHandler PTH;
 
     
-    public GameObject PlayerMenu; 
+    //public GameObject PlayerMenu; 
     
 	void Awake()
 	{
@@ -55,16 +55,13 @@ public class ControllerScript : MonoBehaviour
 			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100))
 			{
 
-                //if (hit.transform.gameObject.GetComponent<TeleportPoint>() != null)
+                
                 if(hit.collider.gameObject.tag == "Floor")
                 {
                     temp = hit.transform.gameObject;
-					//hit.transform.gameObject.GetComponent<TeleportPoint>().HighlightGreen();
-					//Debug.Log("test");
+
 
                     teleportDestination = hit.point; // store where it sends you
-
-                    
 				}
 				
 				hitPoint = hit.point;
@@ -132,8 +129,8 @@ public class ControllerScript : MonoBehaviour
 
         if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
-            bool IsActive = PlayerMenu.GetActive();
-            PlayerMenu.SetActive(!IsActive);
+           // bool IsActive = PlayerMenu.GetActive();
+            //PlayerMenu.SetActive(!IsActive);
         }
 
 	}
