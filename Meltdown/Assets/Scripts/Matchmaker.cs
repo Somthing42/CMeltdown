@@ -30,7 +30,7 @@ public class Matchmaker : Photon.PunBehaviour
 
     bool CountdownStarted = false;
 
-    public GameObject PopupCanvas;
+    public GameObject KeyBoardCanvas;
 
     public string GameScene = "Game";
 
@@ -100,23 +100,23 @@ public class Matchmaker : Photon.PunBehaviour
         }
     }
 
-    public void CreateRoomEntry(string RoomName)
+    public void CreateRoomEntry(Text RoomNameText) 
     {
         // NOTE(barret): CreateRoom will place you in the room as soon as you create it
-        if (PhotonNetwork.CreateRoom(RoomName, new RoomOptions() { MaxPlayers = 4 }, null))
+        if (PhotonNetwork.CreateRoom(RoomNameText.text, new RoomOptions() { MaxPlayers = 4 }, null))
         {
 
-            AddLine("Room: " + RoomName + " created");
+            AddLine("Room: " + RoomNameText.text + " created");
         }
         else
         {
-            AddLine("failed to create room: " + RoomName);
+            AddLine("failed to create room: " + RoomNameText.text);
         }
     }
 
-    public void CreateRoomWindow()
+    public void ActivateKeyBoard()
     {
-        GameObject Popup = Instantiate(PopupCanvas, null);
+        KeyBoardCanvas.SetActive(true);
     }
 
     public void LeaveRoom()
@@ -134,33 +134,8 @@ public class Matchmaker : Photon.PunBehaviour
 
     void InRoom()
     {
-#if false
-        UIList.gameObject.SetActive(false);
-        UIRoom.gameObject.SetActive(true);
-        LeaveRoomButton.SetActive(true);
-        CreateRoomButton.SetActive(false);
-        GetRoomsButton.SetActive(false);
-        UIRoom.FillPlayerSlot(PhotonNetwork.playerList);
+        //PhotonNetwork.LoadLevel(GameScene);
 
-
-        if (PhotonNetwork.room.PlayerCount >= PlayerCountToStartMatch && CountdownStarted == false)
-        {
-            AddLine("Raising Countdown event");
-
-
-            byte evCode = 0;
-            byte[] content = new byte[] { 1, 2, 5, 10 };
-            bool reliable = true;
-
-            RaiseEventOptions Options = new RaiseEventOptions();
-            Options.Receivers = ReceiverGroup.All;
-            PhotonNetwork.RaiseEvent(evCode, content, reliable, Options);
-
-
-        }
-#else
-        PhotonNetwork.LoadLevel(GameScene);
-#endif 
     }
 
     void ConnectedToMaster()
@@ -265,16 +240,6 @@ public class Matchmaker : Photon.PunBehaviour
         InfoPanelText.text = PanelString + Line + "\n";
         ++LineCount;
 
-        int Full = 32;
-
-        if (LineCount > Full)
-        {
-            while (PanelString.Remove(0) != "\n")
-            {
-
-            }
-            LineCount = 0;
-        }
 
     }
 

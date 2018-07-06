@@ -80,7 +80,7 @@ public class ControllerScript : MonoBehaviour
 		// 3
 		if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
 		{
-            GameManager.Instance.infoPanel.AddLine(temp.name + " was it with tag " + temp.tag);
+            //GameManager.Instance.infoPanel.AddLine(temp.name + " was it with tag " + temp.tag);
             if (teleportDestination != Vector3.zero && PTH.CanTeleport)
 			{
                 //GameManager.Instance.infoPanel.AddLine("Teleporting");
@@ -116,7 +116,7 @@ public class ControllerScript : MonoBehaviour
                     }
                     else if (RotZone.Type == RotationZone.ZoneType.FORWARD_DIR)
                     {
-                        GameManager.Instance.infoPanel.AddLine("Forward Dir");
+                        //GameManager.Instance.infoPanel.AddLine("Forward Dir");
                         Rot = RotZone.Orinator.transform.rotation;
 
                     }
@@ -137,6 +137,11 @@ public class ControllerScript : MonoBehaviour
         }
 
 	}
+
+    void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
 
 	private void EnablePointer(RaycastHit hit)
 	{

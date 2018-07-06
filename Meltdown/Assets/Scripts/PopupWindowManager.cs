@@ -11,7 +11,7 @@ public class PopupWindowManager : MonoBehaviour
 
     public void ButtonPress()
     {
-        Matchmaker.instance.CreateRoomEntry(StringCapture);
+        //Matchmaker.instance.CreateRoomEntry(StringCapture);
 
         Destroy(this.gameObject);
     }

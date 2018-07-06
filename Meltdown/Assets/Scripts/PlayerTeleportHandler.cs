@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerTeleportHandler : MonoBehaviour
+public class PlayerTeleportHandler : Photon.PunBehaviour
 {
 
 	public int PlayerIndex;
-	PhotonView photonView;
+	//PhotonView photonView;
+
+    private Vector3 StartLocation; 
 
 
     // Use this for initialization
     void Start()
 	{
-		photonView = GetComponent<PhotonView>();
+		//photonView = GetComponent<PhotonView>();
+        StartLocation = transform.position;
 	}
 
 
@@ -25,7 +28,12 @@ public class PlayerTeleportHandler : MonoBehaviour
 		PhotonNetwork.OnEventCall -= this.GameStartTeleport;
 	}
 
+    public override void OnLeftRoom()
+    {
+        VRTK.VRTK_HeightAdjustTeleport TS = GetComponent<VRTK.VRTK_HeightAdjustTeleport>();
 
+        TS.ForceTeleport(StartLocation, Quaternion.identity);
+    }
 
     void GameStartTeleport(byte eventcode, object content, int senderid)
 	{
@@ -45,6 +53,8 @@ public class PlayerTeleportHandler : MonoBehaviour
 		}
 
 	}
+
+    
 
     public bool CanTeleport = true;
     public IEnumerator TeleportDelay(float SecondsOfDelay)
