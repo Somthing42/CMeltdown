@@ -107,8 +107,7 @@ public class DisplayTimer : MonoBehaviour
 
 			if (GameManager.Instance.timerTime <= 0) 
 			{
-                // Spamming Console
-				// failEvent.TestFailedSequence ();
+				failEvent.TestFailedSequence ();
 				Time.timeScale = 0;
 			}
 		}

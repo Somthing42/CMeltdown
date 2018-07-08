@@ -56,7 +56,7 @@ public class GameManager : Photon.PunBehaviour, IPunObservable
 
     public RotationZone[] RotationZones;
 
-    //[HideInInspector]
+    [HideInInspector]
     public InfoPanel infoPanel;
 
     private bool CountdownStarted { get; set; }
@@ -65,7 +65,7 @@ public class GameManager : Photon.PunBehaviour, IPunObservable
     private int ReadyUpCount { get; set; }
 
 
-    //public Animation BlastDoorAnimation;
+    public Animation BlastDoorAnimation;
 
     void Awake()
     {
@@ -78,7 +78,6 @@ public class GameManager : Photon.PunBehaviour, IPunObservable
             Destroy(this.gameObject);
         }
 
-        // NOTE(barret): What is the point of this. We don't have any data that we need to keep between scene transitions
         DontDestroyOnLoad(gameObject);
 
         this.infoPanel = this.GetComponent<InfoPanel>();

@@ -1,26 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerTeleportHandler : Photon.PunBehaviour
+public class PlayerTeleportHandler : MonoBehaviour
 {
 
 	public int PlayerIndex;
-	//PhotonView photonView;
-
-    private Vector3 StartLocation; 
+	PhotonView photonView;
 
 
     // Use this for initialization
     void Start()
 	{
-		//photonView = GetComponent<PhotonView>();
-        StartLocation = transform.position;
+		photonView = GetComponent<PhotonView>();
 	}
 
 
 	void OnEnable()
 	{
-        //print("OnEnable PlayerTeleportHandler");
+        print("OnEnable PlayerTeleportHandler");
 		PhotonNetwork.OnEventCall += this.GameStartTeleport;
 	}
 	void OnDisable()
@@ -28,12 +25,7 @@ public class PlayerTeleportHandler : Photon.PunBehaviour
 		PhotonNetwork.OnEventCall -= this.GameStartTeleport;
 	}
 
-    public override void OnLeftRoom()
-    {
-        VRTK.VRTK_HeightAdjustTeleport TS = GetComponent<VRTK.VRTK_HeightAdjustTeleport>();
 
-        TS.ForceTeleport(StartLocation, Quaternion.identity);
-    }
 
     void GameStartTeleport(byte eventcode, object content, int senderid)
 	{
